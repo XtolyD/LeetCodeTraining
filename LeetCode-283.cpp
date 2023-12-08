@@ -14,15 +14,26 @@ public:
     void moveZeroes(vector<int> &nums){
         int countZore = 0;
         for (int i = 0; i < nums.size() - countZore; i++){
-            if (nums[i] == 0 && i + countZore < nums.size() - 1){
-                nums[i] = nums[i + 1];
-                countZore++;
-                i -= 1;
+            if (nums[i] == 0){  // 当找到0时候
+                countZore++;    // 0计数器加1
+                // 删除当前位置的0
+                nums.erase(nums.begin() + i);
+                // 因为删除了一个元素，所以i要减1
+                i--;
+                // 在数组末尾添加0
+                nums.push_back(0);
             }
         }
-        for (int i = nums.size() - countZore; i < nums.size(); i++){
-            nums[i] = 0;
     }
 };
 
-# TODO unsolved
+int main(){
+    vector<int> nums = {0, 1, 0, 3, 12};
+    Solution solution;
+    solution.moveZeroes(nums);
+    for (int i = 0; i < nums.size(); i++){
+        cout << nums[i] << " ";
+    }
+    cout << endl;
+    return 0;
+}
